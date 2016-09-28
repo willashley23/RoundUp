@@ -1,4 +1,7 @@
 chrome.browserAction.onClicked.addListener(function(activeTab){
-  var newURL = "http://stackoverflow.com/";
-  chrome.tabs.create({ url: newURL });
+  chrome.storage.sync.get(function(items) {
+    Object.keys(items).forEach( (key) => {
+      chrome.tabs.create({url: items[key]})
+    });
+  });
 });
